@@ -1,14 +1,13 @@
 local M = {}
 
 function M.setup(opts)
-      	opts = opts or {}
-	M.width = opts.width or 80
-	M.height = opts.height or 80
+	opts = opts or {}
+	M.width = opts.width or 70
+	M.height = opts.height or 20
 	M.row = opts.row or 5
 	M.col = opts.col or 100
 	M.default_keymaps = opts.default_keymaps or true
 
-	-- You can edit popup buffer
 	if M.default_keymaps then
 		M.register_default_keymaps()
 	end
@@ -47,11 +46,10 @@ function M.toggle_window()
 end
 
 function M.clear_window()
+	M.buf = nil
 	if M.window_id and vim.api.nvim_win_is_valid(M.window_id) then
 		vim.api.nvim_win_hide(M.window_id)
-		vim.api.nvim_buf_delete(M.buf, { unload = true })
 		M.window_id = nil
-		M.buf = nil
 	end
 end
 
